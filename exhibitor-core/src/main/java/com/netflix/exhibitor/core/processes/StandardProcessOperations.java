@@ -155,7 +155,8 @@ public class StandardProcessOperations implements ProcessOperations
         String          portSpec = String.format(":%d:%d", usState.getConfig().getInt(IntConfigs.CONNECT_PORT), usState.getConfig().getInt(IntConfigs.ELECTION_PORT));
         for ( ServerSpec spec : usState.getServerList().getSpecs() )
         {
-            localProperties.setProperty("server." + spec.getServerId(), spec.getHostname() + portSpec + spec.getServerType().getZookeeperConfigValue());
+            localProperties.setProperty("server." + spec.getServerId(), spec.getHostname() + portSpec + spec.getServerType().getZookeeperConfigValue()
+                    + ";" + usState.getConfig().getInt(IntConfigs.CLIENT_PORT));
         }
 
         if ( (usState.getUs() != null) && (usState.getUs().getServerType() == ServerType.OBSERVER) )
